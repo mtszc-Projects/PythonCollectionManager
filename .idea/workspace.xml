@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32333279-fdf5-4358-9df3-4decf21ce22a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/PythonCollectionmanager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PythonCollectionmanager.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +33,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.test_collection">
+  <component name="RunManager" selected="Python.test_user">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PythonCollectionmanager" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -99,13 +97,36 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test_user" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PythonCollectionmanager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_user.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.main" />
       <item itemvalue="Python.test_item_movie_book_album" />
       <item itemvalue="Python.test_collection" />
+      <item itemvalue="Python.test_user" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test_user" />
         <item itemvalue="Python.test_collection" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.test_item_movie_book_album" />
@@ -134,22 +155,22 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="499" y="154" width="424" height="484" key="FileChooserDialogImpl/67.27.1299.741@67.27.1299.741" timestamp="1593610047801" />
-    <state width="1276" height="175" key="GridCell.Tab.0.bottom" timestamp="1594046471183">
+    <state width="1276" height="175" key="GridCell.Tab.0.bottom" timestamp="1594047600789">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1276" height="175" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1594046471183" />
-    <state width="1276" height="175" key="GridCell.Tab.0.center" timestamp="1594046471183">
+    <state width="1276" height="175" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1594047600789" />
+    <state width="1276" height="175" key="GridCell.Tab.0.center" timestamp="1594047600788">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1276" height="175" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1594046471183" />
-    <state width="1276" height="175" key="GridCell.Tab.0.left" timestamp="1594046471182">
+    <state width="1276" height="175" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1594047600788" />
+    <state width="1276" height="175" key="GridCell.Tab.0.left" timestamp="1594047600788">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1276" height="175" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1594046471182" />
-    <state width="1276" height="175" key="GridCell.Tab.0.right" timestamp="1594046471183">
+    <state width="1276" height="175" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1594047600788" />
+    <state width="1276" height="175" key="GridCell.Tab.0.right" timestamp="1594047600789">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1276" height="175" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1594046471183" />
+    <state width="1276" height="175" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1594047600789" />
     <state x="205" y="31" key="SettingsEditor" timestamp="1593601495168">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
