@@ -28,7 +28,7 @@ class Album(Item):
     def display_data(self):
         Item.display_data(self)
         print("Author: ", self.__author)
-        print("Length: ", self.__length)
+        print(f"Length: {self.__length}\n")
 
     def write_data(self):
         Item.write_data(self)

@@ -28,7 +28,7 @@ class Book(Item):
     def display_data(self):
         Item.display_data(self)
         print("Author: ", self.__author)
-        print("Pages: ", self.__pages)
+        print(f"Pages: {self.__pages}\n")
 
     def write_data(self):
         Item.write_data(self)

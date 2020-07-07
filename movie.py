@@ -38,7 +38,7 @@ class Movie(Item):
         Item.display_data(self)
         print("Director: ", self.__director)
         print("Scriptwriter: ", self.__script_writer)
-        print("Length: ", self.__length, " minutes")
+        print(f"Length: {self.__length} minutes\n")
 
     def write_data(self):
         Item.write_data(self)

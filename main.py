@@ -5,7 +5,6 @@ from collectionmanager import CollectionManager
 def main():
     user = User()
     manager1 = CollectionManager(user)
-    manager1.name_change()  # issue with while loop in manage function
     manager1.manage()
 
 
