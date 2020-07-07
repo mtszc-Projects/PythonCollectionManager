@@ -1,15 +1,21 @@
 class User:
 
+    __quantity = 2  # max no of each type of item in collection
     __max_collections = 3  # max different collection for one user
 
-    def __init__(self, name="No data", surname="No data", user_collection=None):
+    def __init__(self, name="Unknown", surname="User", user_collection=None):
         self.__name = name  # private attribute
         self.__surname = surname  # private attribute
         self.__user_collection = user_collection if user_collection else []  # private attribute
 
-    #  GETTERS
+    # GETTERS
+
     @classmethod
     def f__quantity(cls):
+        return cls.__quantity
+
+    @classmethod
+    def f__max_collections(cls):
         return cls.__max_collections
 
     @property
