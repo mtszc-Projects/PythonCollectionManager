@@ -3,6 +3,7 @@ from collection import Collection
 from book import Book
 from movie import Movie
 from album import Album
+import pathlib
 
 
 class CollectionManager:
@@ -39,6 +40,25 @@ class CollectionManager:
             self.__user.f__name = new_name
             self.__user.f__surname = new_surname
 
+    def choose_collection(self):
+        self.clear()
+        length = len(self.__user.f__user_collection)
+        if length == 0:
+            self.collection_not_created()
+        else:
+            print("From which collection you want to remove item?")
+            for _ in range(length):
+                print(f"{_ + 1}: {self.__user.f__user_collection[_].f__name}")
+            flag = input("Choose the number from list above: ")
+            while type(flag) is not int:
+                try:
+                    flag = int(flag)
+                    if flag <= 0 or flag > length:
+                        flag = input("Choose the number from list above: ")
+                except ValueError:
+                    flag = input("Choose the number from list above: ")
+            return self.__user.f__user_collection[flag - 1]
+
     def collection_not_created(self):
         input("To do this action you have to create collection first.\n\n"
               "Press ENTER to go back to main menu: ")
@@ -53,7 +73,7 @@ class CollectionManager:
         length = len(self.__user.f__user_collection)
         if length >= self.__user.f__max_collections():
             print("You can't create new collection, you already reached maximum number of collections."
-                  "You can modify existing collections or delete one of them.")
+                  "You can modify existing collections or delete one of them.\n")
             self.exit_to_menu()
         else:
             collection_name = input(f"How you want to name collection no {length+1}?: ")
@@ -61,85 +81,67 @@ class CollectionManager:
             self.__user.f__user_collection.append(new_collection)
             self.__user.f__user_collection[length].f__name = collection_name
             print(f"\nCongratulations! You created new collection named: "
-                  f"{self.__user.f__user_collection[length-1].f__name}\n")
+                  f"{self.__user.f__user_collection[length].f__name}\n")
             self.exit_to_menu()
 
     def add_item(self):
-        self.clear()
-        length = len(self.__user.f__user_collection)
-        if length == 0:
-            self.collection_not_created()
+        collection = self.choose_collection()
+        if not collection:
+            pass
         else:
-            print("To which collection you want to add item?")
-            for _ in range(length):
-                print(f"{_+1}: {self.__user.f__user_collection[_].f__name}")
-            flag = input("Choose the number from list above: ")
-            while type(flag) is not int:
-                try:
-                    flag = int(flag)
-                    if flag <= 0 or flag > length:
-                        flag = input("Choose the number from list above: ")
-                except ValueError:
-                    flag = input("Choose the number from list above: ")
-            collection = self.__user.f__user_collection[flag-1]
             item_type = input(f"What you want to add to collection {collection.f__name}?\n"
                               f"(book - press b; movie - press m; album - press a):")
             while item_type != 'b' and item_type != 'm' and item_type != 'a':
                 item_type = input(
                     f"What you want to add to collection {collection.f__name}?\n"
                     f"(book - press b; movie - press m; album - press a):")
+            print()
             if item_type == 'b':
                 if len(collection.f__book_collection) < self.__user.f__max_collections():
                     new_book = Book()
                     new_book.write_data()
                     collection.f__book_collection.append(new_book)
+                    print(f"\nItem successfully added to your collection {collection.f__name}.\n"
+                          f"At the moment in this collection you have: "
+                          f"{len(collection.f__book_collection)} books, "
+                          f"{len(collection.f__movie_collection)} movies and "
+                          f"{len(collection.f__album_collection)} albums.\n")
                 else:
                     print("You can't add new book. You have maximum amount of books in that collection.\n"
                           "If you want you can modify or delete existing books.\n")
-                    self.exit_to_menu()
             elif item_type == 'm':
                 if len(collection.f__movie_collection) < self.__user.f__max_collections():
                     new_movie = Movie()
                     new_movie.write_data()
                     collection.f__movie_collection.append(new_movie)
+                    print(f"\nItem successfully added to your collection {collection.f__name}\n"
+                          f"At the moment in this collection you have: "
+                          f"{len(collection.f__book_collection)} books, "
+                          f"{len(collection.f__movie_collection)} movies and "
+                          f"{len(collection.f__album_collection)} albums.")
                 else:
                     print("You can't add new movie. You have maximum amount of movies in that collection.\n"
                           "If you want you can modify or delete existing movies.\n")
-                    self.exit_to_menu()
-            else:
+            elif item_type == 'a':
                 if len(collection.f__album_collection) < self.__user.f__max_collections():
                     new_album = Album()
                     new_album.write_data()
                     collection.f__album_collection.append(new_album)
+                    print(f"Item successfully added to your collection {collection.f__name}\n"
+                          f"At the moment in this collection you have: "
+                          f"{len(collection.f__book_collection)} books, "
+                          f"{len(collection.f__movie_collection)} movies and "
+                          f"{len(collection.f__album_collection)} albums.")
                 else:
                     print("You can't add new album. You have maximum amount of albums in that collection.\n"
                           "If you want you can modify or delete existing albums.\n")
-                    self.exit_to_menu()
-            print(f"Item successfully added to your collection {collection.f__name}\n"
-                  f"At the moment in this collection you have: "
-                  f"{len(collection.f__book_collection)} books, "
-                  f"{len(collection.f__movie_collection)} movies and "
-                  f"{len(collection.f__album_collection)} albums.")
             self.exit_to_menu()
 
     def display_collection(self):
-        self.clear()
-        length = len(self.__user.f__user_collection)
-        if length == 0:
-            self.collection_not_created()
+        collection = self.choose_collection()
+        if not collection:
+            pass
         else:
-            print("Which collection you want to display?")
-            for _ in range(length):
-                print(f"{_ + 1}: {self.__user.f__user_collection[_].f__name}")
-            flag = input("Choose the number from list above: ")
-            while type(flag) is not int:
-                try:
-                    flag = int(flag)
-                    if flag <= 0 or flag > len(self.__user.f__user_collection):
-                        flag = input("Choose the number from list above: ")
-                except ValueError:
-                    flag = input("Choose the number from list above: ")
-            collection = self.__user.f__user_collection[flag - 1]
             self.clear()
             print(f"Collection {collection.f__name} content: \n")
             print("BOOKS:\n")
@@ -198,26 +200,13 @@ class CollectionManager:
             self.exit_to_menu()
 
     def change_collection_name(self):
-        self.clear()
-        length = len(self.__user.f__user_collection)
-        if length == 0:
-            self.collection_not_created()
+        collection = self.choose_collection()
+        if not collection:
+            pass
         else:
-            print("Which collection you want to rename?")
-            for _ in range(length):
-                print(f"{_+1}: {self.__user.f__user_collection[_].f__name}")
-            flag = input("Choose the number from list above: ")
-            while type(flag) is not int:
-                try:
-                    flag = int(flag)
-                    if flag <= 0 or flag > len(self.__user.f__user_collection):
-                        flag = input("Choose the number from list above: ")
-                except ValueError:
-                    flag = input("Choose the number from list above: ")
-            collection = self.__user.f__user_collection[flag-1]
-            new_name = input(f"What's the new name for collection {collection.f__name}?:")
+            new_name = input(f"\nWhat's the new name for collection {collection.f__name}?:")
             collection.f__name = new_name
-            print(f"You successfully changed name of collection. New name is: {collection.f__name}")
+            print(f"\nYou successfully changed name of collection. New name is: {collection.f__name}\n")
             self.exit_to_menu()
 
     def search_item(self):
@@ -253,23 +242,10 @@ class CollectionManager:
             self.exit_to_menu()
 
     def update_item(self):
-        self.clear()
-        length = len(self.__user.f__user_collection)
-        if length == 0:
-            self.collection_not_created()
+        collection = self.choose_collection()
+        if not collection:
+            pass
         else:
-            print("In which collection you want to update item?")
-            for _ in range(len(self.__user.f__user_collection)):
-                print(f"{_ + 1}: {self.__user.f__user_collection[_].f__name}")
-            flag = input("Choose the number from list above: ")
-            while type(flag) is not int:
-                try:
-                    flag = int(flag)
-                    if flag <= 0 or flag > len(self.__user.f__user_collection):
-                        flag = input("Choose the number from list above: ")
-                except ValueError:
-                    flag = input("Choose the number from list above: ")
-            collection = self.__user.f__user_collection[flag-1]
             item_type = input(f"Which type of item you want to update?\n"
                               f"(book - press b; movie - press m; album - press a):")
             while item_type != 'b' and item_type != 'm' and item_type != 'a':
@@ -291,10 +267,11 @@ class CollectionManager:
                                 book_number = input("Choose the book number from list above: ")
                         except ValueError:
                             book_number = input("Choose the book number from list above: ")
+                    print()
                     collection.f__book_collection[book_number-1].write_data()
-                    print("Item updated successfully!")
+                    print("\nItem updated successfully!\n")
                 else:
-                    print("In this collection there isn't any books.")
+                    print("In this collection there isn't any books.\n")
             elif item_type == 'm':
                 print("\nMOVIES: \n")
                 if len(collection.f__movie_collection) > 0:
@@ -311,8 +288,101 @@ class CollectionManager:
                                 movie_number = input("Choose the movie number from list above: ")
                         except ValueError:
                             movie_number = input("Choose the movie number from list above: ")
+                    print()
                     collection.f__movie_collection[movie_number - 1].write_data()
-                    print("Item updated successfully!")
+                    print("\nItem updated successfully!\n")
+                else:
+                    print("In this collection there isn't any movies.\n")
+            elif item_type == 'a':
+                print("\nALBUMS: \n")
+                if len(collection.f__album_collection) > 0:
+                    counter = 1
+                    for album in collection.f__album_collection:
+                        print(f"Album no: {counter}")
+                        album.display_data()
+                        counter += 1
+                    album_number = input("Choose the album number from list above: ")
+                    while type(album_number) is not int:
+                        try:
+                            album_number = int(album_number)
+                            if album_number <= 0 or album_number > len(collection.f__album_collection):
+                                album_number = input("Choose the album number from list above: ")
+                        except ValueError:
+                            album_number = input("Choose the album number from list above: ")
+                    print()
+                    collection.f__album_collection[album_number - 1].write_data()
+                    print("\nItem updated successfully!\n")
+                else:
+                    print("In this collection there isn't any albums.\n")
+            self.exit_to_menu()
+
+    def statistics(self):
+        self.clear()
+        counter_book = 0
+        counter_movie = 0
+        counter_album = 0
+        for collection in self.__user.f__user_collection:
+            for book in collection.f__book_collection:
+                counter_book += 1
+            for movie in collection.f__movie_collection:
+                counter_movie += 1
+            for album in collection.f__album_collection:
+                counter_album += 1
+        print("In your collections there are: ")
+        print(f"{counter_book} books.")
+        print(f"{counter_movie} movies.")
+        print(f"{counter_album} albums.")
+        self.exit_to_menu()
+
+    def delete_item(self):
+        collection = self.choose_collection()
+        if not collection:
+            pass
+        else:
+            item_type = input(f"What you want to delete from collection {collection.f__name}?\n"
+                              f"(book - press b; movie - press m; album - press a):")
+            while item_type != 'b' and item_type != 'm' and item_type != 'a':
+                item_type = input(
+                    f"What you want to delete from collection {collection.f__name}?\n"
+                    f"(book - press b; movie - press m; album - press a):")
+            if item_type == 'b':
+                print("\nBOOKS: \n")
+                if len(collection.f__book_collection) > 0:
+                    counter = 1
+                    for book in collection.f__book_collection:
+                        print(f"Book no: {counter}")
+                        book.display_data()
+                        counter += 1
+                    book_number = input("Choose the book number from list above: ")
+                    while type(book_number) is not int:
+                        try:
+                            book_number = int(book_number)
+                            if book_number <= 0 or book_number > len(collection.f__book_collection):
+                                book_number = input("Choose the book number from list above: ")
+                        except ValueError:
+                            book_number = input("Choose the book number from list above: ")
+                    collection.f__book_collection.pop(book_number-1)
+                    print("\nItem removed successfully!\n")
+                else:
+                    print("In this collection there isn't any books.")
+            elif item_type == 'm':
+                print("\nMOVIE: \n")
+                if len(collection.f__movie_collection) > 0:
+                    counter = 1
+                    for movie in collection.f__movie_collection:
+                        print(f"Movie no: {counter}")
+                        movie.display_data()
+                        counter += 1
+                    movie_number = input("Choose the movie number from list above: ")
+                    while type(movie_number) is not int:
+                        try:
+                            movie_number = int(movie_number)
+                            if movie_number <= 0 or movie_number > len(collection.f__movie_collection):
+                                movie_number = input("Choose the movie number from list above: ")
+                        except ValueError:
+                            movie_number = input("Choose the movie number from list above: ")
+                    collection.f__movie_collection.pop(movie_number-1)
+                    print("\nItem removed successfully!\n")
                 else:
                     print("In this collection there isn't any movies.")
             elif item_type == 'a':
@@ -331,23 +401,56 @@ class CollectionManager:
                                 album_number = input("Choose the album number from list above: ")
                         except ValueError:
                             album_number = input("Choose the album number from list above: ")
-                    collection.f__album_collection[album_number - 1].write_data()
-                    print("Item updated successfully!")
+                    collection.f__album_collection.pop(album_number-1)
+                    print("\nItem removed successfully!\n")
                 else:
-                    print("In this collection there isn't any movies.")
+                    print("In this collection there isn't any albums.")
             self.exit_to_menu()
 
-    def statistics(self):
-        pass
-
-    def delete_item(self):
-        pass
-
     def delete_collection(self):
-        pass
+        collection = self.choose_collection()
+        self.__user.f__user_collection.remove(collection)
+        print("\nCollection removed successfully.\n")
+        self.exit_to_menu()
 
     def save_to_file(self):
-        pass
+        self.clear()
+        f = open("Collection", "w+")
+        f.write(f"User: {self.__user.f__name} {self.__user.f__surname}")
+        f.write("\nAll items in all collections: \n")
+        for collection in self.__user.f__user_collection:
+            f.write(f"\nCollection: {collection.f__name}\n")
+            f.write(f"\nBOOKS: \n")
+            for book in collection.f__book_collection:
+                f.write(f"\nType: {book.f__item_type}\n")
+                f.write(f"Title: {book.f__title}\n")
+                f.write(f"Genre: {book.f__genre}\n")
+                f.write(f"Year: {book.f__year}\n")
+                f.write(f"Price: {book.f__price} $\n")
+                f.write(f"Author: {book.f__author}\n")
+                f.write(f"Pages: {book.f__pages}\n")
+            f.write(f"\nMOVIES: \n")
+            for movie in collection.f__movie_collection:
+                f.write(f"\nType: {movie.f__item_type}\n")
+                f.write(f"Title: {movie.f__title}\n")
+                f.write(f"Genre: {movie.f__genre}\n")
+                f.write(f"Year: {movie.f__year}\n")
+                f.write(f"Price: {movie.f__price} $\n")
+                f.write(f"Director: {movie.f__director}\n")
+                f.write(f"Scriptwriter: {movie.f__script_writer}\n")
+                f.write(f"Length: {movie.f__length} minutes\n")
+            f.write(f"\nALBUMS: \n")
+            for album in collection.f__movie_collection:
+                f.write(f"\nType: {album.f__item_type}\n")
+                f.write(f"Title: {album.f__title}\n")
+                f.write(f"Genre: {album.f__genre}\n")
+                f.write(f"Year: {album.f__year}\n")
+                f.write(f"Price: {album.f__price} $\n")
+                f.write(f"Author: {album.f__author}\n")
+                f.write(f"Length: {album.f__length}\n")
+        f.close()
+        print(f"File Collection.txt save in directory:{pathlib.Path(__file__).parent.absolute()}")
+        self.exit_to_menu()
 
     def manage(self):
         self.clear()
